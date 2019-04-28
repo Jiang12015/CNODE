@@ -41,7 +41,7 @@
         </li>
         <li>
           <!--分页-->
-          <pagination ></pagination>
+          <pagination @handleList="renderList"></pagination>
         </li>
       </ul>
     </div>
@@ -49,33 +49,40 @@
 </template>
 
 <script>
-import pagination from './Pagination'
+import pagination from "./Pagination";
 export default {
   name: "PostList",
   data() {
     return {
       isLoading: false,
-      posts: []
+      posts: [], //代表页面的列表数组
+      postpage: 1
     };
   },
-  components:{pagination},
+  components: { pagination },
   methods: {
     getData() {
       this.$http
         .get("https://cnodejs.org/api/v1/topics", {
-          page: 1,
-          limit: 20
+          params: {
+            page: this.postpage,
+            limit: 20
+          }
         })
         .then(res => {
-          this.isLoading = false;
+          this.isLoading = false; //加载成功，去除动画
           this.posts = res.data.data;
         })
-        .catch(err => {
+        .catch(function(err) {
           //处理返回失败后的问题
           console.log(err);
         });
-    }
-  },
+    },
+        renderList(value){
+          this.postpage = value;
+          this.getData();
+        }
+      },
   beforeMount() {
     this.isLoading = true;
     this.getData();
