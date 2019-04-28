@@ -7,6 +7,8 @@ import PostList from './components/PostList'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
+  base: process.env.BASE_URL,
   routes: [{
     name: 'root',
     path:'/',
