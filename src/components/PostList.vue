@@ -56,17 +56,24 @@ export default {
     return {
       isLoading: false,
       posts: [], //代表页面的列表数组
-      postpage: 1
+      postpage: 1,
+      tab: ''
     };
   },
   components: { pagination },
+  watch: {
+    $route(to, from) {
+      this.getData();
+    }
+  },
   methods: {
     getData() {
       this.$http
         .get("https://cnodejs.org/api/v1/topics", {
           params: {
             page: this.postpage,
-            limit: 20
+            limit: 20,
+            tab: this.$route.query.tab || 'all',
           }
         })
         .then(res => {
@@ -78,11 +85,11 @@ export default {
           console.log(err);
         });
     },
-        renderList(value){
-          this.postpage = value;
-          this.getData();
-        }
-      },
+    renderList(value) {
+      this.postpage = value;
+      this.getData();
+    }
+  },
   beforeMount() {
     this.isLoading = true;
     this.getData();

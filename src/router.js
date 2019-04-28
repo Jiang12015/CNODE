@@ -32,6 +32,6 @@ export default new Router({
       components: {
         main: UserInfo
       }
-    }
+    },
   ]
 })
