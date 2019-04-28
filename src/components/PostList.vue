@@ -6,13 +6,13 @@
     <div class="posts" v-else>
       <ul>
         <li>
-          <div class="toobar">
-            <span>全部</span>
-            <span>精华</span>
-            <span>分享</span>
-            <span>问答</span>
-            <span>招聘</span>
-          </div>
+          <nav class="nav">
+            <router-link to="/" :class="{active: $route.query.tab == 'all' || !$route.query.tab}">全部</router-link>
+            <router-link to="/?tab=good" :class="{active: $route.query.tab == 'good'}">精华</router-link>
+            <router-link to="/?tab=share" :class="{active: $route.query.tab == 'share'}">分享</router-link>
+            <router-link to="/?tab=ask" :class="{active: $route.query.tab == 'ask'}">问答</router-link>
+            <router-link to="/?tab=job" :class="{active: $route.query.tab == 'job'}">招聘</router-link>
+          </nav>
         </li>
         <li v-for="post in posts">
           <!-- 头像 -->
@@ -28,13 +28,20 @@
           'topiclist-tab':(post.good !=true && post.top !=true)}]"
           >{{post | tabFormatter}}</span>
           <!-- 标题 -->
-          <router-link :to="{name:'post_content',params:{
-            id:post.id
-          }}">
-          <span>{{post.title}}</span>
+          <router-link
+            :to="{name:'post_content',params:{
+            id:post.id,
+            name:post.author.loginname
+          }}"
+          >
+            <span>{{post.title}}</span>
           </router-link>
           <!-- 最终回复时间 -->
           <span class="last_reply">{{post.last_reply_at | formatDate}}</span>
+        </li>
+        <li>
+          <!--分页-->
+          <pagination ></pagination>
         </li>
       </ul>
     </div>
@@ -42,6 +49,7 @@
 </template>
 
 <script>
+import pagination from './Pagination'
 export default {
   name: "PostList",
   data() {
@@ -50,6 +58,7 @@ export default {
       posts: []
     };
   },
+  components:{pagination},
   methods: {
     getData() {
       this.$http
@@ -162,17 +171,23 @@ li span {
   font-size: 12px;
 }
 
-.toobar {
+.nav {
   height: 40px;
   background-color: #f5f5f5;
-}
-
-.toobar span {
-  font-size: 14px;
-  color: #80bd01;
-  line-height: 40px;
-  margin: 0 10px;
-  cursor: pointer;
+  a {
+    font-size: 14px;
+    color: #80bd01;
+    line-height: 40px;
+    margin: 0 10px;
+    cursor: pointer;
+    &:hover {
+      color: #9e78c0;
+    }
+    &.active {
+      color: red;
+      border-radius: 3px;
+    }
+  }
 }
 
 .toobar span:hover {
