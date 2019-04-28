@@ -1,11 +1,11 @@
 <template>
   <div class="header">
-    <a href="./">
+    <router-link to="/">
     <img src="..\assets\cnodejs_light.svg" alt>
-    </a>
+    </router-link>
     <ul>
       <li>
-        <a href="./">首页</a>
+        <router-link to="/">首页</router-link>
       </li>
       <li>
         <a href="#">新手入门</a>
