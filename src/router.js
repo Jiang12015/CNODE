@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Article from './components/Article'
-import PostList from './components/PostList'
+import Article from '@/views/Article'
+import PostList from '@/views/PostList.vue'
 import UserInfo from './components/UserInfo'
 import SlideBar from './components/SlideBar'
 

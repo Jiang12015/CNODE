@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Header from "./components/Header";
-import PostList from "./components/PostList";
+import Header from "@/views/Header";
+import PostList from '@/views/PostList.vue'
 
 export default {
   name: "App",

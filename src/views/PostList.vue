@@ -49,7 +49,8 @@
 </template>
 
 <script>
-import pagination from "./Pagination";
+import pagination from "@/components/Pagination.vue";
+import { debug } from 'util';
 export default {
   name: "PostList",
   data() {
@@ -57,7 +58,6 @@ export default {
       isLoading: false,
       posts: [], //代表页面的列表数组
       postpage: 1,
-      tab: ''
     };
   },
   components: { pagination },
@@ -73,7 +73,7 @@ export default {
           params: {
             page: this.postpage,
             limit: 20,
-            tab: this.$route.query.tab || 'all',
+            tab: this.$route.query.tab || 'all',            
           }
         })
         .then(res => {
