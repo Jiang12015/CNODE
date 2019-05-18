@@ -14,7 +14,7 @@
             <router-link to="/?tab=job" :class="{active: $route.query.tab == 'job'}">招聘</router-link>
           </nav>
         </li>
-        <li v-for="post in posts">
+        <li v-for="post in posts" :key="post.id">
           <!-- 头像 -->
           <img :src="post.author.avatar_url" alt>
           <!-- 回复量/浏览量 -->
@@ -50,14 +50,14 @@
 
 <script>
 import pagination from "@/components/Pagination.vue";
-import { debug } from 'util';
+import { debug } from "util";
 export default {
   name: "PostList",
   data() {
     return {
       isLoading: false,
       posts: [], //代表页面的列表数组
-      postpage: 1,
+      postpage: 1
     };
   },
   components: { pagination },
@@ -73,7 +73,7 @@ export default {
           params: {
             page: this.postpage,
             limit: 20,
-            tab: this.$route.query.tab || 'all',            
+            tab: this.$route.query.tab || "all"
           }
         })
         .then(res => {
