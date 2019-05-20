@@ -4,15 +4,13 @@ import Article from '@/views/Article'
 import PostList from '@/views/PostList.vue'
 import UserInfo from './components/UserInfo'
 import SlideBar from './components/SlideBar'
-
-
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [{
-      name: 'root',
+      name: 'HomePage',
       path: '/',
       components: {
         main: PostList

@@ -61,11 +61,6 @@ export default {
     };
   },
   components: { pagination },
-  watch: {
-    $route(to, from) {
-      this.getData();
-    }
-  },
   methods: {
     getData() {
       this.$http
@@ -87,12 +82,26 @@ export default {
     },
     renderList(value) {
       this.postpage = value;
+      this.$router.push({
+        name: this.$route.name,
+        query: {
+          tab: this.$route.query.tab,
+          page: this.postpage
+        }
+      });
       this.getData();
     }
   },
   beforeMount() {
     this.isLoading = true;
     this.getData();
+  },
+  watch: {
+    $route(to, from) {
+      if (to.name !== "HomePage") return;
+      if (to.query.page == 1 || !to.query.page) this.postpage = 1;
+      this.getData();
+    }
   }
 };
 </script>
