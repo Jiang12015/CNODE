@@ -41,7 +41,7 @@
         </li>
         <li>
           <!--分页-->
-          <pagination @handleList="renderList"></pagination>
+          <pagination :currentPage="postpage" @handleList="renderList"></pagination>
         </li>
       </ul>
     </div>
@@ -98,6 +98,8 @@ export default {
   },
   watch: {
     $route(to, from) {
+      if (to.name !== "HomePage") return;
+      if (to.query.page == 1 || !to.query.page) this.postpage = 1;
       this.getData();
     }
   }

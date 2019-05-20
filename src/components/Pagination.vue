@@ -16,11 +16,10 @@
 import $ from "jquery";
 export default {
   name: "Pagination",
-
+  props:['currentPage'],
   data() {
     return {
       pagebtns: [1, 2, 3, 4, 5, "....."],
-      currentPage: 1,
       jduge: false
     };
   },
