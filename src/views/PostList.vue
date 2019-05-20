@@ -98,8 +98,6 @@ export default {
   },
   watch: {
     $route(to, from) {
-      if (to.name !== "HomePage") return;
-      if (to.query.page == 1 || !to.query.page) this.postpage = 1;
       this.getData();
     }
   }
